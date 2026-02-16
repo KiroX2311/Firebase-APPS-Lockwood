@@ -143,19 +143,34 @@ function displayItems() {
         return;
     }
 
-    let html = '';
+    container.innerHTML = '';
     for (let key in boxData) {
-        html += `
-            <div class="item">
-                <div class="item-content">
-                    <div class="item-key">${escapeHtml(key)}</div>
-                    <div class="item-value">${escapeHtml(boxData[key])}</div>
-                </div>
-                <button class="delete-btn" onclick="deleteItem('${escapeHtml(key)}')">Delete</button>
-            </div>
-        `;
+        const itemDiv = document.createElement('div');
+        itemDiv.className = 'item';
+        
+        const contentDiv = document.createElement('div');
+        contentDiv.className = 'item-content';
+        
+        const keyDiv = document.createElement('div');
+        keyDiv.className = 'item-key';
+        keyDiv.textContent = key;
+        
+        const valueDiv = document.createElement('div');
+        valueDiv.className = 'item-value';
+        valueDiv.textContent = boxData[key];
+        
+        contentDiv.appendChild(keyDiv);
+        contentDiv.appendChild(valueDiv);
+        
+        const deleteBtn = document.createElement('button');
+        deleteBtn.className = 'delete-btn';
+        deleteBtn.textContent = 'Delete';
+        deleteBtn.addEventListener('click', () => deleteItem(key));
+        
+        itemDiv.appendChild(contentDiv);
+        itemDiv.appendChild(deleteBtn);
+        container.appendChild(itemDiv);
     }
-    container.innerHTML = html;
 }
 
 // Utility Functions
@@ -178,20 +193,8 @@ function showMessage(message, type) {
     }, 3000);
 }
 
-function escapeHtml(text) {
-    const map = {
-        '&': '&amp;',
-        '<': '&lt;',
-        '>': '&gt;',
-        '"': '&quot;',
-        "'": '&#039;'
-    };
-    return text.replace(/[&<>"']/g, m => map[m]);
-}
-
 // Export functions to global scope for onclick handlers
 window.signUp = signUp;
 window.signIn = signIn;
 window.signOut = signOut;
 window.addItem = addItem;
-window.deleteItem = deleteItem;
