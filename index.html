@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Firebase Box - Lockwood</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🔥 Firebase Box</h1>
+            <p class="subtitle">A simple Firebase-powered storage application</p>
+        </header>
+
+        <div class="auth-section" id="authSection">
+            <h2>Authentication</h2>
+            <div id="loginForm">
+                <input type="email" id="emailInput" placeholder="Email" required>
+                <input type="password" id="passwordInput" placeholder="Password" required>
+                <div class="button-group">
+                    <button onclick="signIn()">Sign In</button>
+                    <button onclick="signUp()">Sign Up</button>
+                </div>
+            </div>
+            <div id="userInfo" style="display: none;">
+                <p>Welcome, <span id="userEmail"></span>!</p>
+                <button onclick="signOut()">Sign Out</button>
+            </div>
+        </div>
+
+        <div class="firebase-box" id="firebaseBox" style="display: none;">
+            <h2>Your Firebase Box</h2>
+            <div class="box-content">
+                <div class="input-section">
+                    <input type="text" id="itemKey" placeholder="Item Key">
+                    <input type="text" id="itemValue" placeholder="Item Value">
+                    <button onclick="addItem()">Add to Box</button>
+                </div>
+                <div class="items-list" id="itemsList">
+                    <h3>Items in Box:</h3>
+                    <div id="itemsContainer"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="setup-info">
+            <h3>⚙️ Setup Instructions</h3>
+            <p>To use this Firebase Box application:</p>
+            <ol>
+                <li>Create a Firebase project at <a href="https://console.firebase.google.com" target="_blank">Firebase Console</a></li>
+                <li>Enable Email/Password authentication in Firebase Console</li>
+                <li>Create a Realtime Database or Firestore database</li>
+                <li>Update the Firebase configuration in <code>app.js</code></li>
+            </ol>
+        </div>
+    </div>
+
+    <!-- Firebase SDKs -->
+    <script type="module" src="app.js"></script>
+</body>
+</html>
